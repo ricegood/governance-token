@@ -1,30 +1,22 @@
 pragma solidity ^0.6.0;
 
 import 'openzeppelin-solidity/contracts/token/ERC20/ERC20.sol';
+import 'openzeppelin-solidity/contracts/access/Ownable.sol';
 
-contract CGT is ERC20 {
+contract CGT is ERC20, Ownable {
     constructor (
         string memory name,
         string memory symbol,
-        address initialAccount,
         uint256 initialBalance
     ) public payable ERC20(name, symbol) {
-        _mint(initialAccount, initialBalance);
+        _mint(owner(), initialBalance);
     }
 
-    function mint(address account, uint256 amount) public {
+    function mint(address account, uint256 amount) public onlyOwner {
         _mint(account, amount);
     }
 
-    function burn(address account, uint256 amount) public {
+    function burn(address account, uint256 amount) public onlyOwner {
         _burn(account, amount);
-    }
-
-    function transferInternal(address from, address to, uint256 value) public {
-        _transfer(from, to, value);
-    }
-
-    function approveInternal(address owner, address spender, uint256 value) public {
-        _approve(owner, spender, value);
     }
 }
