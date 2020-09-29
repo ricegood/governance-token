@@ -11,14 +11,12 @@ contract("cgt", function () {
         await instance.mint(accounts[1], 2000, {
             from: Owner,
         });
-
         Balance = await instance.balanceOf.call(accounts[1]);
         assert.equal(Balance.toNumber(), 2000, "Balance is wrong");
 
         await instance.mint(accounts[2], 3000, {
             from: Owner,
         });
-
         Balance = await instance.balanceOf.call(accounts[2]);
         assert.equal(Balance.toNumber(), 3000, "Balance is wrong");
 
@@ -27,9 +25,8 @@ contract("cgt", function () {
 
         await instance.transfer(
             accounts[1],
-            500, {
-            from: accounts[2],
-        }
+            500,
+            { from: accounts[2], }
         );
 
         Balance = await instance.balanceOf.call(accounts[1]);

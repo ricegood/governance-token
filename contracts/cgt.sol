@@ -4,6 +4,7 @@ import 'openzeppelin-solidity/contracts/token/ERC20/ERC20.sol';
 import 'openzeppelin-solidity/contracts/access/Ownable.sol';
 
 contract CGT is ERC20, Ownable {
+
     constructor (
         string memory name,
         string memory symbol,
