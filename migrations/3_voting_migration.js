@@ -1,4 +1,4 @@
-const voting = artifacts.require("voting");
+const voting = artifacts.require("Voting");
 
 const _name = "CURG_Governance_Token";
 const _symbol = "CGT";

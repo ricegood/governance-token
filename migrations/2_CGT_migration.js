@@ -1,4 +1,4 @@
-const cgt = artifacts.require("cgt");
+const cgt = artifacts.require("Cgt");
 
 const _name = "CURG_Governance_Token";
 const _symbol = "CGT";

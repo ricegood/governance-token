@@ -1,4 +1,4 @@
-const cgt = artifacts.require("cgt");
+const cgt = artifacts.require("Cgt");
 
 contract("cgt", function () {
     it("should assert true", async function () {

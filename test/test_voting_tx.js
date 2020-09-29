@@ -1,4 +1,4 @@
-const voting = artifacts.require("voting");
+const voting = artifacts.require("Voting");
 
 contract("voting", function () {
     it("should assert true", async function () {
