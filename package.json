@@ -1,0 +1,27 @@
+{
+  "name": "governance-token",
+  "version": "1.0.0",
+  "description": "CURG Governance Token (ERC20)",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "openzeppelin-solidity": "^3.2.0",
+    "web3": "^0.20.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/curg/governance-token.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/curg/governance-token/issues"
+  },
+  "homepage": "https://github.com/curg/governance-token#readme"
+}
