@@ -1,12 +1,12 @@
 <template>
-  <Home />
+  <Ballot />
 </template>
 
 <script>
-import Home from '../components/Home';
+import Ballot from '../components/Ballot';
 export default {
   components: {
-    Home,
+    Ballot,
   },
 };
 </script>
