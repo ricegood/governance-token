@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Ballot from './views/Ballot.vue'
+import Ballots from './views/Ballots.vue'
 import Vote from './views/Vote.vue'
-import Page404 from './views/404.vue'
 
 Vue.use(Router)
 
@@ -25,6 +25,11 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
     },
     {
+      path: '/ballots',
+      name: 'ballots',
+      component: Ballots
+    },
+    {
       path: '/ballot/:number',
       name: 'ballot',
       component: Ballot
@@ -36,7 +41,7 @@ export default new Router({
     },
     {
       path: '*',
-      component: Page404
+      component: () => import('./views/404.vue')
     }
   ]
 })
