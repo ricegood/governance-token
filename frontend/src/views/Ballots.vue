@@ -1,12 +1,12 @@
 <template>
-  <Ballot />
+  <Ballots />
 </template>
 
 <script>
-import Ballot from '../components/Ballot';
+import Ballots from '../components/Ballots';
 export default {
   components: {
-    Ballot,
+    Ballots,
   },
 };
 </script>

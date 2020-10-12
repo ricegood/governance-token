@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Ballot from './views/Ballot.vue'
 import Ballots from './views/Ballots.vue'
+import CreateBallot from './views/CreateBallot.vue'
 import Vote from './views/Vote.vue'
 
 Vue.use(Router)
@@ -33,6 +34,11 @@ export default new Router({
       path: '/ballot/:number',
       name: 'ballot',
       component: Ballot
+    },
+    {
+      path: '/createballot',
+      name: 'createballot',
+      component: CreateBallot
     },
     {
       path: '/vote',
