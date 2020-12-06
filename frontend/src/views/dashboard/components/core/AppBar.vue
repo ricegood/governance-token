@@ -106,9 +106,27 @@
       </v-list>
     </v-menu>
 
+    <!-- If Connected to metamask -->
+    <v-btn
+      v-if="isInjected"
+      class="ml-2"
+      min-width="0"
+      text
+      to="/pages/user"
+    >
+      <v-avatar
+        color="black"
+        size="30"
+      >
+        <span class="white--text">
+          {{ coinbase.substring(0, 4) }}
+        </span>
+      </v-avatar>
+    </v-btn>
+
     <!-- If not Connected to metamask -->
     <v-btn
-      v-if="!metamaskConnected"
+      v-else
       class="ml-2"
       min-width="0"
       text
@@ -120,23 +138,6 @@
       </v-icon>
     </v-btn>
 
-    <!-- If Connected to metamask -->
-    <v-btn
-      v-if="metamaskConnected"
-      class="ml-2"
-      min-width="0"
-      text
-      to="/pages/user"
-    >
-      <v-avatar
-        color="black"
-        size="30"
-      >
-        <span class="white--text">
-          {{ metamaskAddress.substring(0, 4) }}
-        </span>
-      </v-avatar>
-    </v-btn>
   </v-app-bar>
 </template>
 
@@ -188,8 +189,6 @@
     },
 
     data: () => ({
-      metamaskConnected: false,
-      metamaskAddress: '',
       web3s: undefined,
       metamask: 'Unable to connect Metamask',
       notifications: [
@@ -201,6 +200,12 @@
 
     computed: {
       ...mapState(['drawer']),
+      ...mapState({
+        isInjected: state => state.web3.isInjected,
+        network: state => NETWORKS[state.web3.networkId],
+        coinbase: state => state.web3.coinbase,
+        balance: state => state.web3.balance,
+      }),
     },
 
     methods: {
@@ -229,13 +234,7 @@
         this.isMetamask()
       },
       enableMetamask: async function () {
-        this.metamaskAddress = (await window.ethereum.enable()).toString()
-        if (this.metamaskAddress !== '') {
-          this.metamaskConnected = true
-          console.log('metamask connected! addr = ', this.metamaskAddress)
-        } else {
-          console.log('metamask NOT connected! addr = ', this.metamaskAddress)
-        }
+        await window.ethereum.enable()
       },
     },
   }

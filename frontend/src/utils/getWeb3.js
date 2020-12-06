@@ -24,28 +24,28 @@ const getWeb3 = new Promise((resolve, reject) => {
             }
         })
     })
-// }).then(result => {
-//     return new Promise((resolve, reject) => {
-//         result.web3().eth.getCoinbase((err, coinbase) => {
-//             if (err) {
-//                 reject(new Error('Unable to retrieve coinbase'));
-//             } else {
-//                 result = Object.assign({}, result, { coinbase });
-//                 resolve(result);
-//             }
-//         });
-//     });
-// }).then(result => {
-//     return new Promise((resolve, reject) => {
-//         result.web3().eth.getBalance(result.coinbase, (err, balance) => {
-//             if (err) {
-//                 reject(new Error(`Unable to retrieve balance for address: ${result.coinbase}`))
-//             } else {
-//                 result = Object.assign({}, result, { balance });
-//                 resolve(result);
-//             }
-//         });
-//     });
+ }).then(result => {
+     return new Promise((resolve, reject) => {
+         result.web3().eth.getCoinbase((err, coinbase) => {
+             if (err) {
+                 reject(new Error('Unable to retrieve coinbase'))
+             } else {
+                 result = Object.assign({}, result, { coinbase })
+                 resolve(result)
+             }
+         })
+     })
+ }).then(result => {
+     return new Promise((resolve, reject) => {
+         result.web3().eth.getBalance(result.coinbase, (err, balance) => {
+             if (err) {
+                 reject(new Error(`Unable to retrieve balance for address: ${result.coinbase}`))
+             } else {
+                 result = Object.assign({}, result, { balance })
+                 resolve(result)
+             }
+         })
+     })
 })
 
 export default getWeb3
