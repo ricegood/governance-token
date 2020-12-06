@@ -1,53 +1,77 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
-import Ballot from './views/Ballot.vue'
-import Ballots from './views/Ballots.vue'
-import CreateBallot from './views/CreateBallot.vue'
-import Vote from './views/Vote.vue'
 
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
+      component: () => import('@/views/dashboard/Index'),
+      children: [
+        // Dashboard
+        {
+          name: '',
+          path: '',
+          component: () => import('@/views/dashboard/Dashboard'),
+        },
+        // Pages
+        {
+          name: '',
+          path: 'pages/user',
+          component: () => import('@/views/dashboard/pages/UserActivity'),
+        },
+        {
+          name: '',
+          path: 'pages/ballots',
+          component: () => import('@/views/dashboard/pages/Ballots'),
+        },
+        {
+          name: '',
+          path: 'pages/proposal',
+          component: () => import('@/views/dashboard/pages/Proposal'),
+        },
+        {
+          name: 'User Profile',
+          path: 'pages/userprofile',
+          component: () => import('@/views/dashboard/pages/UserProfile'),
+        },
+        {
+          name: 'Notifications',
+          path: 'components/notifications',
+          component: () => import('@/views/dashboard/component/Notifications'),
+        },
+        {
+          name: 'Icons',
+          path: 'components/icons',
+          component: () => import('@/views/dashboard/component/Icons'),
+        },
+        {
+          name: 'Typography',
+          path: 'components/typography',
+          component: () => import('@/views/dashboard/component/Typography'),
+        },
+        // Tables
+        {
+          name: 'Regular Tables',
+          path: 'tables/regular-tables',
+          component: () => import('@/views/dashboard/tables/RegularTables'),
+        },
+        // Maps
+        {
+          name: 'Google Maps',
+          path: 'maps/google-maps',
+          component: () => import('@/views/dashboard/maps/GoogleMaps'),
+        },
+        // Upgrade
+        {
+          name: 'Upgrade',
+          path: 'upgrade',
+          component: () => import('@/views/dashboard/Upgrade'),
+        },
+      ],
     },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-    },
-    {
-      path: '/ballots',
-      name: 'ballots',
-      component: Ballots
-    },
-    {
-      path: '/ballot/:number',
-      name: 'ballot',
-      component: Ballot
-    },
-    {
-      path: '/createballot',
-      name: 'createballot',
-      component: CreateBallot
-    },
-    {
-      path: '/vote',
-      name: 'vote',
-        component: Vote
-    },
-    {
-      path: '*',
-      component: () => import('./views/404.vue')
-    }
-  ]
+  ],
 })
