@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import getWeb3 from './utils/getWeb3'
+import getContract from './utils/getContract'
 
 Vue.use(Vuex)
 
@@ -37,6 +38,10 @@ export default new Vuex.Store({
      web3Copy.web3Instance = result.web3
      state.web3 = web3Copy
    },
+   registerContractInstance (state, payload) {
+     console.log('voting contract instance: ', payload)
+     state.contractInstance = () => payload
+   },
   },
   actions: {
     async registerWeb3 ({ commit }) {
@@ -47,6 +52,14 @@ export default new Vuex.Store({
         commit('registerWeb3Instance', result)
       } catch (err) {
         console.log('error in action registerWeb3', err)
+      }
+    },
+    async getContractInstance ({ commit }) {
+      try {
+        const result = await getContract
+        commit('registerContractInstance', result)
+      } catch (err) {
+        console.log('error in action getContractInstance', err)
       }
     },
   },

@@ -6,19 +6,20 @@
   >
     <v-row>
       <v-col
+        v-for="(item, index) in items.slice().reverse()"
         cols="12"
         md="4"
       >
         <base-material-card
+          v-if="4 + ballotNumber - index >= 7"
           color="success"
           class="px-5 py-3"
         >
           <template v-slot:heading>
             <div
-              @click="dialog = true"
               class="display-2 font-weight-bold"
             >
-              야식 요일 투표하자
+              Ballot # {{ ballotNumber - index }}
               <!-- (#{{ballot.header.index}}) {{ ballot.body.title }} -->
               <v-chip
                 color="secondary"
@@ -29,23 +30,50 @@
             </div>
 
             <div class="subtitle-1 font-weight-light">
-              to 15 December, 2020
+              to {{ 4 + ballotNumber - index }} December, 2020
             </div>
           </template>
           <v-card-text>
             <v-data-table
+              v-model="selected[ballotNumber - index - 1]"
               :headers="headers"
-              :items="items"
-            />
+              :items="item"
+              :single-select="singleSelect"
+              item-key="id"
+              show-select
+              hide-default-footer	
+            >
+            </v-data-table>
+            <v-row>
+              <v-col
+                cols="12"
+                md="8"
+              >
+                <v-text-field
+                  v-model="votingValue[ballotNumber - index - 1]"
+                  label="voting amount"
+                  single-line
+                  hide-details
+                ></v-text-field>
+              </v-col>
+              <v-col
+                cols="12"
+                md="4"
+              >
+                <v-btn
+                  rounded
+                  color="success"
+                  class="mr-0"
+                  @click="callVoteFunction(ballotNumber - index - 1)"
+                >
+                vote
+                </v-btn>
+              </v-col>
+            </v-row>
           </v-card-text>
         </base-material-card>
-      </v-col>
-
-      <v-col
-        cols="12"
-        md="4"
-      >
         <base-material-card
+          v-else
           color="grey"
           class="px-5 py-3"
         >
@@ -53,7 +81,7 @@
             <div
               class="display-2 font-weight-bold"
             >
-              야식 요일 투표하자
+              Ballot # {{ ballotNumber - index }}
               <!-- (#{{ballot.header.index}}) {{ ballot.body.title }} -->
               <v-chip
                 color="black"
@@ -64,146 +92,49 @@
             </div>
 
             <div class="subtitle-1 font-weight-light">
-              to 8 December, 2020
+              to {{ 4 + ballotNumber - index }} December, 2020
             </div>
           </template>
           <v-card-text>
             <v-data-table
+              v-model="selected[ballotNumber - index - 1]"
               :headers="headers"
-              :items="items"
-            />
-          </v-card-text>
-        </base-material-card>
-      </v-col>
-
-      <v-col
-        cols="12"
-        md="4"
-      >
-        <base-material-card
-          color="grey"
-          class="px-5 py-3"
-        >
-          <template v-slot:heading>
-            <div
-              class="display-2 font-weight-bold"
+              :items="item"
+              :single-select="singleSelect"
+              item-key="id"
+              show-select
+              hide-default-footer	
             >
-              야식 요일 투표하자
-              <!-- (#{{ballot.header.index}}) {{ ballot.body.title }} -->
-              <v-chip
-                color="black"
-                style="height:25px; padding: 10px 10px 10px 10px; margin: 0px 10px 0px 10px;"
+            </v-data-table>
+            <v-row>
+              <v-col
+                cols="12"
+                md="8"
               >
-                #종료됨
-              </v-chip>
-            </div>
-
-            <div class="subtitle-1 font-weight-light">
-              to 1 December, 2020
-            </div>
-          </template>
-          <v-card-text>
-            <v-data-table
-              :headers="headers"
-              :items="items"
-            />
+                <v-text-field
+                  v-model="votingValue[ballotNumber - index - 1]"
+                  label="voting amount"
+                  single-line
+                  hide-details
+                  disable
+                ></v-text-field>
+              </v-col>
+              <v-col
+                cols="12"
+                md="4"
+              >
+                <v-btn
+                  rounded
+                  disable
+                  class="mr-0"
+                >
+                vote
+                </v-btn>
+              </v-col>
+            </v-row>
           </v-card-text>
         </base-material-card>
       </v-col>
-
-    <!-- Dialog -->
-
-    <v-dialog
-      v-model="dialog"
-      max-width="800"
-    >
-      <v-card class="text-center">
-        <v-card-title>
-
-          <v-spacer />
-
-          <v-icon
-            aria-label="Close"
-            @click="dialog = false"
-          >
-            mdi-close
-          </v-icon>
-        </v-card-title>
-
-        <v-card-text>
-      <v-col
-        cols="12"
-        md="12"
-      >
-        <base-material-card class="px-5 py-3">
-          <template v-slot:heading>
-            제목
-          </template>
-
-              <v-card-text>
-                <template v-for="(task, i) in tasks[0]">
-                  <v-row
-                    :key="i"
-                    align="center"
-                  >
-                    <v-col cols="1">
-                      <v-list-item-action>
-                        <v-checkbox
-                          v-model="task.value"
-                          color="secondary"
-                        />
-                      </v-list-item-action>
-                    </v-col>
-
-                    <v-col cols="9">
-                      <div
-                        class="font-weight-light"
-                        v-text="task.text"
-                      />
-                    </v-col>
-
-                    <v-col
-                      cols="2"
-                      class="text-right"
-                    >
-                      <v-icon class="mx-1">
-                        mdi-pencil
-                      </v-icon>
-                      <v-icon
-                        color="error"
-                        class="mx-1"
-                      >
-                        mdi-close
-                      </v-icon>
-                    </v-col>
-                  </v-row>
-                </template>
-              </v-card-text>
-        </base-material-card>
-        <v-btn
-          block
-          color="primary"
-          elevation="2"
-        >
-          진짜? 라고 생각하신다면 여기를 클릭해주십시오
-        </v-btn>
-      </v-col>
-        </v-card-text>
-
-        <v-card-actions>
-          <v-spacer />
-
-          <v-btn
-            color="error"
-            text
-            @click="dialog = false"
-          >
-            Close
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-
     </v-row>
   </v-container>
 </template>
@@ -214,13 +145,11 @@
 
     data () {
       return {
-        dialog: false,
+        ballotNumber: 0,
+        singleSelect: true,
+        votingValue: [],
+        selected: [],
         headers: [
-          {
-            sortable: false,
-            text: 'Rank',
-            value: 'id',
-          },
           {
             sortable: false,
             text: 'Name',
@@ -232,90 +161,73 @@
             value: 'amount',
             align: 'right',
           },
-          {
-            sortable: false,
-            text: 'V',
-          },
         ],
-        items: [
-          {
-            id: 1,
-            name: '월요일',
-            amount: '35,738',
-          },
-          {
-            id: 2,
-            name: '화요일',
-            amount: '15,233',
-          },
-          {
-            id: 3,
-            name: '수요일',
-            amount: '5,124',
-          },
-          {
-            id: 4,
-            name: '목요일',
-            amount: '3,333',
-          },
-          {
-            id: 5,
-            name: '금요일',
-            amount: '1,227',
-          },
-        ],
-        tabs: 0,
-        tasks: {
-          0: [
-            {
-              text: '300동',
-              value: true,
-            },
-            {
-              text: '301동',
-              value: false,
-            },
-            {
-              text: '302동',
-              value: false,
-            },
-          ],
-          1: [
-            {
-              text: '시나몬 스테이크',
-              value: true,
-            },
-            {
-              text: '불고기 백반',
-              value: false,
-            },
-          ],
-          2: [
-            {
-              text: '야식을 꼭 먹어야할까?',
-              value: false,
-            },
-            {
-              text: '피자?',
-              value: true,
-            },
-            {
-              text: '닭강정?',
-              value: true,
-            },
-          ],
-        },
-        list: {
-          0: false,
-          1: false,
-          2: false,
-        },
+        items: [],
       }
     },
 
+    async mounted () {
+      console.log('dispatching getContractInstance')
+      await this.$store.dispatch('getContractInstance')
+      this.getBallotData()
+    },
+
     methods: {
-      complete (index) {
-        this.list[index] = !this.list[index]
+      getBallotData () {
+        this.$store.state.contractInstance().LengthOfBallots( {
+          gas: 300000,
+          value: 0,
+          from: this.$store.state.web3.coinbase,
+        }, (err, result) => {
+          if (err) {
+            console.log(err)
+            this.pending = false
+          } else {
+            this.ballotNumber = parseInt(result.toString())
+            console.log("ballotNumber = ", this.ballotNumber)
+            for (let ballotN = 0; ballotN < this.ballotNumber; ballotN++) {
+              let newItem = []
+              // [TODO] get length of proposal (=4)
+              // get proposal and add to newItem
+              for (let proposalN = 0; proposalN < 4; proposalN++) {
+                this.$store.state.contractInstance().getterProposals(ballotN, proposalN, {
+                  gas: 300000,
+                  value: 0,
+                  from: this.$store.state.web3.coinbase,
+                }, (err, result) => {
+                  if (err) {
+                    console.log(err)
+                    this.pending = false
+                  } else {
+                    const proposal_name = web3.toAscii(result[0])
+                    const proposal_amount = result[1].toString()
+                    newItem.push({id: proposalN, name: proposal_name, amount: proposal_amount})
+                  }
+                })
+              }
+              // push newItem to items
+              this.items.push(newItem)
+              this.selected.push([])
+              this.votingValue.push([])
+            }
+          }
+        })
+      },
+
+      callVoteFunction (ballotN) {
+        console.log('Call Ballot#', ballotN, ' Voting Function! selected = ', this.selected[ballotN][0]['id'], 'voting amount = ', this.votingValue[ballotN])
+        this.$store.state.contractInstance().vote(ballotN, this.selected[ballotN][0]['id'], {
+          gas: 300000,
+          value: 0,
+          from: this.$store.state.web3.coinbase,
+        }, (err, result) => {
+          if (err) {
+            console.log(err)
+            this.pending = false
+          } else {
+            console.log('callVoteFunction transaction !!!!')
+          }
+        })
       },
     },
   }
