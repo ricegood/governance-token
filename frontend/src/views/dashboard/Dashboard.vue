@@ -132,7 +132,7 @@
               mdi-arrow-up
             </v-icon>
             <span class="green--text">55%</span>&nbsp;
-            증가했다 ^^
+             
           </p>
 
           <template v-slot:actions>
@@ -411,7 +411,7 @@
           color="primary"
           elevation="2"
         >
-          진짜? 라고 생각하신다면 여기를 클릭해주십시오
+          제출
         </v-btn>
       </v-col>
     </v-row>

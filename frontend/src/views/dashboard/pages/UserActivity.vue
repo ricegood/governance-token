@@ -17,79 +17,42 @@
               ID
             </th>
             <th class="primary--text">
-              Name
+              Date
             </th>
             <th class="primary--text">
-              Country
+              Transaction
             </th>
             <th class="primary--text">
-              City
-            </th>
-            <th class="text-right primary--text">
-              Salary
+              Amount
             </th>
           </tr>
         </thead>
 
         <tbody>
           <tr>
-            <td>1</td>
-            <td>Dakota Rice</td>
-            <td>Niger</td>
-            <td>Oud-Turnhout</td>
-            <td class="text-right">
-              $36,738
-            </td>
-          </tr>
-
-          <tr>
-            <td>2</td>
-            <td>Minverva Hooper</td>
-            <td>Curaçao</td>
-            <td>Sinaas-Waas</td>
-            <td class="text-right">
-              $23,789
-            </td>
+            <td>4</td>
+            <td>2020. 12. 01</td>
+            <td>지난 글쓰기에 대한 토큰 지급</td>
+            <td>+ 10</td>
           </tr>
 
           <tr>
             <td>3</td>
-            <td>Sage Rodriguez</td>
-            <td>Netherlands</td>
-            <td>Baileux</td>
-            <td class="text-right">
-              $56,142
-            </td>
+            <td>2020. 12. 03</td>
+            <td>투표 참여</td>
+            <td>- 5</td>
           </tr>
-
           <tr>
-            <td>4</td>
-            <td>Philip Chaney</td>
-            <td>Korea, South</td>
-            <td>Overland Park</td>
-            <td class="text-right">
-              $38,735
-            </td>
+            <td>2</td>
+            <td>2020. 12. 04</td>
+            <td>지난 글쓰기에 대한 토큰 지급</td>
+            <td>+ 10</td>
           </tr>
-
           <tr>
-            <td>5</td>
-            <td>Doris Greene</td>
-            <td>Malawi</td>
-            <td>Feldkirchen in Kärnten</td>
-            <td class="text-right">
-              $63,542
-            </td>
-          </tr>
-
-          <tr>
-            <td>6</td>
-            <td>Mason Porter</td>
-            <td>Chile</td>
-            <td>Gloucester</td>
-            <td class="text-right">
-              $78,615
-            </td>
+            <td>1</td>
+            <td>2020. 12. 06</td>
+            <td>투표 참여</td>
+            <td>- 10</td>
           </tr>
         </tbody>
       </v-simple-table>
